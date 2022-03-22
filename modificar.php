@@ -6,13 +6,13 @@ use Laminas\Ldap\Ldap;
 
 ini_set('display_errors', 0);
 if ($_POST['method'] == "PUT") {
-    if ($_POST['uid'] && $_POST['ou'] && $_POST['radioValue'] && $_POST['nouContingut']) {
+    if ($_POST['uid'] && $_POST['unorg'] && $_POST['radioValue'] && $_POST['nouContingut']) {
         
         $atribut = $_POST['radioValue'];
         $nou_contingut = $_POST['nouContingut'];
         
         $uid = $_POST['uid'];
-        $ou = $_POST['ou'];
+        $ou = $_POST['unorg'];
         $dn = 'uid=' . $uid . ',ou=' . $ou . ',dc=fjeclot,dc=net';
         
         $opcions = [
@@ -40,10 +40,12 @@ if ($_POST['method'] == "PUT") {
 
 ?>
 <html>
+    <a href="http://zend-ansasa.fjeclot.net/daw2_m08uf23_projecte_sanchez_andrea/index.php">Tanca la sessió</a>
     <h1>MODIFICAR UN USUARI</h1>
     <form action="http://zend-ansasa.fjeclot.net/daw2_m08uf23_projecte_sanchez_andrea/modificar.php" method="POST" autocomplete="off">
-      <input type="text" name="ou" placeholder="Unitat Organitzativa" required /><br>
-      <input type="text" name="uid" placeholder="Usuari" required /><br>
+      <input type="text" name="method" value="PUT" class="hidden">
+      <input type="text" name="uid" placeholder="Identificador" required /><br>
+      <input type="text" name="unorg" placeholder="Unitat Organitzativa" required /><br><br>
       <input type="radio" name="radioValue" value="uidNumber" />uidNumber<br>
       <input type="radio" name="radioValue" value="gidNumber" />gidNumber<br>
       <input type="radio" name="radioValue" value="homeDirectory" />homeDirectory<br>
@@ -55,9 +57,9 @@ if ($_POST['method'] == "PUT") {
       <input type="radio" name="radioValue" value="mobile" />mobile<br>
       <input type="radio" name="radioValue" value="telephoneNumber" />telephoneNumber<br>
       <input type="radio" name="radioValue" value="title" />title<br>
-      <input type="radio" name="radioValue" value="description" />description<br>
-       <input type="text" name="nouContingut" placeholder="Nou Contingut" required /><br>
+      <input type="radio" name="radioValue" value="description" />description<br><br>
+       <input type="text" name="nouContingut" placeholder="Introduce el nuevo contenido" required /><br>
        <input type="submit" class="button" value="Modificar Usuari" /><br>
       </form>
-      <a href="http://zend-ansasa.fjeclot.net/daw2_m08uf23_projecte_sanchez_andrea/menu.php">Menú usuari</a><br>
+      <a href="http://zend-ansasa.fjeclot.net/daw2_m08uf23_projecte_sanchez_andrea/menu.php">Menu usuari</a><br>
 </html>

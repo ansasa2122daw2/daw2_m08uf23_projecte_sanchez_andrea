@@ -23,6 +23,7 @@ if ($_GET['usr'] && $_GET['ou']){
 }
 ?>
 <html>
+<h2>Tanca la sessió</h2><a href="http://zend-ansasa.fjeclot.net/daw2_m08uf23_projecte_sanchez_andrea/index.php">Tanca la sessió</a>
 	<head>
 		<title>
 			Visualització de totes les dades d'un usuari
