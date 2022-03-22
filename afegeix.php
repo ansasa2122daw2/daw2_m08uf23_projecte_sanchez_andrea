@@ -5,26 +5,30 @@ use Laminas\Ldap\Ldap;
 
 ini_set('display_errors', 0);
 
-$uid=$_GET["uid"];
-$unorg=$_GET["unorg"];
-$num_id=$_GET["uidNumber"];
-$grup=$_GET["gidNumber"];
-$dir_pers=$_GET["homedirectory"];
-$sh=$_GET["loginshell"];
-$cn=$_GET["cn"];
-$sn=$_GET["sn"];
-$nom=$_GET["givenname"];
-$mobil=$_GET["mobile"];
-$adressa=$_GET["postaladdress"];
-$telefon=$_GET["telephonenumber"];
-$titol=$_GET["title"];
-$descripcio=$_GET["description"];
-$objcl=array('inetOrgPerson','organizationalPerson','person','posixAccount','shadowAccount','top');
-#
-#Afegint la nova entrada
+if (
+    $_POST['uid'] && $_POST['ou'] && $_POST['uidNumber'] && $_POST['gidNumber'] && $_POST['homeDirectory'] && $_POST['shell']
+    && $_POST['cn'] && $_POST['sn'] && $_POST['givenName'] && $_POST['postalAddress'] && $_POST['mobil'] && $_POST['telefon']
+    && $_POST['title'] && $_POST['description']
+    ) {
+$uid = '' . $_POST['uid'];
+$ou = '' . $_POST['ou'];
+$uidNumber = $_POST['uidNumber'];
+$gidNumber = $_POST['gidNumber'];
+$homeDirectory = '' . $_POST['homeDirectory'];
+$shell = '' . $_POST['shell'];
+$cn = '' . $_POST['cn'];
+$sn = '' . $_POST['sn'];
+$givenName = '' . $_POST['givenName'];
+$postalAddress = '' . $_POST['postalAddress'];
+$mobil = '' . $_POST['mobil'];
+$telefon = '' . $_POST['telefon'];
+$titol = '' . $_POST['title'];
+$descripcio = '' . $_POST['description'];
+$objcl = array('inetOrgPerson', 'organizationalPerson', 'person', 'posixAccount', 'shadowAccount', 'top');
+
 $domini = 'dc=fjeclot,dc=net';
 $opcions = [
-    'host' => 'zend-dacomo.fjeclot.net',
+    'host' => 'zend-ansasa.fjeclot.net',
     'username' => "cn=admin,$domini",
     'password' => 'fjeclot',
     'bindRequiresDn' => true,
@@ -36,43 +40,45 @@ $ldap->bind();
 $nova_entrada = [];
 Attribute::setAttribute($nova_entrada, 'objectClass', $objcl);
 Attribute::setAttribute($nova_entrada, 'uid', $uid);
-Attribute::setAttribute($nova_entrada, 'uidNumber', $num_id);
-Attribute::setAttribute($nova_entrada, 'gidNumber', $grup);
-Attribute::setAttribute($nova_entrada, 'homeDirectory', $dir_pers);
-Attribute::setAttribute($nova_entrada, 'loginShell', $sh);
+Attribute::setAttribute($nova_entrada, 'uidNumber', $uidNumber);
+Attribute::setAttribute($nova_entrada, 'gidNumber', $gidNumber);
+Attribute::setAttribute($nova_entrada, 'homeDirectory', $homeDirectory);
+Attribute::setAttribute($nova_entrada, 'loginShell', $shell);
 Attribute::setAttribute($nova_entrada, 'cn', $cn);
 Attribute::setAttribute($nova_entrada, 'sn', $sn);
-Attribute::setAttribute($nova_entrada, 'givenName', $nom);
+Attribute::setAttribute($nova_entrada, 'givenName', $givenName);
 Attribute::setAttribute($nova_entrada, 'mobile', $mobil);
-Attribute::setAttribute($nova_entrada, 'postalAddress', $adressa);
+Attribute::setAttribute($nova_entrada, 'postalAddress', $postalAddress);
 Attribute::setAttribute($nova_entrada, 'telephoneNumber', $telefon);
 Attribute::setAttribute($nova_entrada, 'title', $titol);
 Attribute::setAttribute($nova_entrada, 'description', $descripcio);
-$dn = 'uid='.$uid.',ou='.$unorg.',dc=fjeclot,dc=net';
-if($ldap->add($dn, $nova_entrada)) echo "Usuari creat";	
+$dn = 'uid=' . $uid . ',ou=' . $ou . ',dc=fjeclot,dc=net';
+if($ldap->add($dn, $nova_entrada)){
+    echo "Usuari creat";	
+}
+    }
 ?>
 <html>
 <body>
 <h1>MODIFICA USUARI</h1>
     	<form action="http://zend-ansasa.fjeclot.net/daw2_m08uf23_projecte_sanchez_andrea/afegeix.php" method="POST">
-			Identificador <input type="text" name="uid"><br>
-			Unitat Organitzativa <input type="text" name="unorg"><br>
-			uidNumber <input type="text" name="uidNumber"><br>
-			gidNumber <input type="text" name="gidNumber"><br>
-			Directori personal <input type="text" name="homedirectory"><br>
-			Shell <input type="text" name="loginshell"><br>
-			cn <input type="text" name="cn"><br>
-			sn <input type="text" name="sn"><br>
-			givenName <input type="text" name="givenname"><br>
-			PostalAdress <input type="text" name="postaladdress"><br>
-			mobile <input type="text" name="mobile"><br>
-			telephoneNumber <input type="text" name="telephonenumber"><br>
-			title <input type="text" name="title"><br>
-			description <input type="text" name="description"><br>
-			<input type="submit" value="Agefeix" />
+			<input type="text" name="uid" placeholder="UID" required /><br>
+            <input type="text" name="ou" placeholder="Unitat Organitzativa" required /><br>
+            <input type="number" name="uidNumber" placeholder="UID Number" required /><br>
+            <input type="number" name="gidNumber" placeholder="GID Number" required /><br>
+            <input type="text" name="homeDirectory" placeholder="Directori Personal" required /><br>
+            <input type="text" name="shell" placeholder="Shell" required /><br>
+            <input type="text" name="cn" placeholder="CN" required /><br>
+            <input type="text" name="sn" placeholder="SN" required /><br>
+            <input type="text" name="givenName" placeholder="Given Name" required /><br>
+            <input type="text" name="postalAddress" placeholder="Areça Postal" required /><br>
+            <input type="text" name="mobil" placeholder="Nº de Telèfon Mòbil" required /><br>
+            <input type="text" name="telefon" placeholder="Nº de Telèfon" required /><br>
+            <input type="text" name="title" placeholder="Títol" required /><br>
+            <input type="text" name="description" placeholder="Descripció" required /><br>
+            <input type="submit" class="button" value="Afegir Usuari" /><br>
 			</form>
-			<a href="http://zend-ansasa.fjeclot.net/daw2_m08uf23_projecte_sanchez_andrea/menu.php">Menú usuari</a><br>
+		<a href="http://zend-ansasa.fjeclot.net/daw2_m08uf23_projecte_sanchez_andrea/menu.php">Menú usuari</a><br>
 </body>
-
 
 </html>
