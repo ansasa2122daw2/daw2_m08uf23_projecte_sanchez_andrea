@@ -59,7 +59,7 @@ if($ldap->add($dn, $nova_entrada)){
     }
 ?>
 <html>
-<h2>Tanca la sessió</h2><a href="http://zend-ansasa.fjeclot.net/daw2_m08uf23_projecte_sanchez_andrea/index.php">Tanca la sessio</a>
+<a href="http://zend-ansasa.fjeclot.net/daw2_m08uf23_projecte_sanchez_andrea/index.php">Tanca la sessio</a>
 <body>
 <h1>MODIFICA USUARI</h1>
     	<form action="http://zend-ansasa.fjeclot.net/daw2_m08uf23_projecte_sanchez_andrea/afegeix.php" method="POST">

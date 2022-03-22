@@ -32,7 +32,7 @@ try{
 
 ?>
 <html>
-<h2>Tanca la sessió</h2><a href="http://zend-ansasa.fjeclot.net/daw2_m08uf23_projecte_sanchez_andrea/index.php">Tanca la sessió</a>
+<a href="http://zend-ansasa.fjeclot.net/daw2_m08uf23_projecte_sanchez_andrea/index.php">Tanca la sessió</a>
     <body>
     <h1>ELIMINA USUARI</h1>
     	<form action="http://zend-ansasa.fjeclot.net/daw2_m08uf23_projecte_sanchez_andrea/elimina.php" method="POST">
