@@ -3,6 +3,8 @@ require 'vendor/autoload.php';
 use Laminas\Ldap\Attribute;
 use Laminas\Ldap\Ldap;
 
+session_start();
+if (isset($_SESSION['adm'])) {
 ini_set('display_errors', 0);
 
 if (
@@ -57,9 +59,10 @@ if($ldap->add($dn, $nova_entrada)){
     echo "Usuari creat";	
 }
     }
+}
 ?>
 <html>
-<a href="http://zend-ansasa.fjeclot.net/daw2_m08uf23_projecte_sanchez_andrea/index.php">Tanca la sessio</a>
+<a href="http://zend-ansasa.fjeclot.net/daw2_m08uf23_projecte_sanchez_andrea/tancarSession.php">Tanca la sessio</a>
 <body>
 <h1>MODIFICA USUARI</h1>
     	<form action="http://zend-ansasa.fjeclot.net/daw2_m08uf23_projecte_sanchez_andrea/afegeix.php" method="POST">

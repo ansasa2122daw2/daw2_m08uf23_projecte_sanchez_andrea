@@ -4,6 +4,9 @@ require 'vendor/autoload.php';
 use Laminas\Ldap\Attribute;
 use Laminas\Ldap\Ldap;
 
+session_start();
+if (isset($_SESSION['adm'])) {
+
 ini_set('display_errors', 0);
 if ($_POST['method'] == "PUT") {
     if ($_POST['uid'] && $_POST['unorg'] && $_POST['radioValue'] && $_POST['nouContingut']) {
@@ -37,13 +40,15 @@ if ($_POST['method'] == "PUT") {
         }
     }
 }
+}
 
 ?>
 <html>
-    <a href="http://zend-ansasa.fjeclot.net/daw2_m08uf23_projecte_sanchez_andrea/index.php">Tanca la sessió</a>
+<style>.amaga{display:none;}</style>
+    <a href="http://zend-ansasa.fjeclot.net/daw2_m08uf23_projecte_sanchez_andrea/tancarSession.php">Tanca la sessió</a>
     <h1>MODIFICAR UN USUARI</h1>
     <form action="http://zend-ansasa.fjeclot.net/daw2_m08uf23_projecte_sanchez_andrea/modificar.php" method="POST" autocomplete="off">
-      <input type="text" name="method" value="PUT" class="hidden">
+      <input type="text" name="method" value="PUT" class="amaga">
       <input type="text" name="uid" placeholder="Identificador" required /><br>
       <input type="text" name="unorg" placeholder="Unitat Organitzativa" required /><br><br>
       <input type="radio" name="radioValue" value="uidNumber" />uidNumber<br>

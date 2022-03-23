@@ -1,6 +1,9 @@
 <?php 
 require 'vendor/autoload.php';
 use Laminas\Ldap\Ldap;
+
+session_start();
+if (isset($_SESSION['adm'])) {
 ini_set('display_errors',0);
 if ($_GET['usr'] && $_GET['ou']){
     $domini = 'dc=fjeclot,dc=net';
@@ -21,9 +24,10 @@ if ($_GET['usr'] && $_GET['ou']){
         if ($atribut != "dn") echo $atribut.": ".$dada[0].'<br>';
     }
 }
+}
 ?>
 <html>
-<a href="http://zend-ansasa.fjeclot.net/daw2_m08uf23_projecte_sanchez_andrea/index.php">Tanca la sessió</a>
+<a href="http://zend-ansasa.fjeclot.net/daw2_m08uf23_projecte_sanchez_andrea/tancarSession.php">Tanca la sessió</a>
 	<head>
 		<title>
 			Visualització de totes les dades d'un usuari

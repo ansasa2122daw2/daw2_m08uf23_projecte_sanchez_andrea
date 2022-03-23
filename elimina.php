@@ -2,42 +2,47 @@
 require 'vendor/autoload.php';
 use Laminas\Ldap\Ldap;
 
+session_start();
+if (isset($_SESSION['adm'])) {
 ini_set('display_errors', 0);
 #
-# Entrada a esborrar: usuari 3 creat amb el projecte zendldap2
-#
-$uid = $_GET["uid"];
-$unorg = $_GET["unorg"];
-$dn = 'uid='.$uid.',ou='.$unorg.',dc=fjeclot,dc=net';
-#
-#Opcions de la connexió al servidor i base de dades LDAP
-$opcions = [
-    'host' => 'zend-ansasa.fjeclot.net',
-    'username' => 'cn=admin,dc=fjeclot,dc=net',
-    'password' => 'fjeclot',
-    'bindRequiresDn' => true,
-    'accountDomainName' => 'fjeclot.net',
-    'baseDn' => 'dc=fjeclot,dc=net',
-];
-# Esborrant l'entrada
-#
-$ldap = new Ldap($opcions);
-$ldap->bind();
-try{
-    $ldap->delete($dn);
-    echo "<b>Entrada esborrada</b><br>";
-} catch (Exception $e){
-    echo "<br>";
+if ($_POST['method'] == "DELETE") {
+    if ($_POST['usr'] && $_POST['ou']) {
+        
+        $uid = $_POST['usr'];
+        $unorg = $_POST['ou'];
+        $dn = 'uid=' . $uid . ',ou=' . $unorg . ',dc=fjeclot,dc=net';
+        
+        $opcions = [
+            'host' => 'zend-ansasa.fjeclot.net',
+            'username' => 'cn=admin,dc=fjeclot,dc=net',
+            'password' => 'fjeclot',
+            'bindRequiresDn' => true,
+            'accountDomainName' => 'fjeclot.net',
+            'baseDn' => 'dc=fjeclot,dc=net',
+        ];
+        
+        $ldap = new Ldap($opcions);
+        $ldap->bind();
+        $isEsborrat = false;
+        try {
+            if ($ldap->delete($dn)) echo "<b>Esborrat Correctament</b><br>";
+        } catch (Exception $e) {
+            echo "<b>No existeix</b><br>";
+        }
+    }
+} 
 }
-
 ?>
 <html>
-<a href="http://zend-ansasa.fjeclot.net/daw2_m08uf23_projecte_sanchez_andrea/index.php">Tanca la sessió</a>
+<style>.noMostrar{display:none;}</style>
+<a href="http://zend-ansasa.fjeclot.net/daw2_m08uf23_projecte_sanchez_andrea/tancarSession.php">Tanca la sessió</a>
     <body>
     <h1>ELIMINA USUARI</h1>
     	<form action="http://zend-ansasa.fjeclot.net/daw2_m08uf23_projecte_sanchez_andrea/elimina.php" method="POST">
-			Identificador <input type="text" name="uid"><br>
-			Unitat Organitzativa <input type="text" name="unorg"><br>
+			<input type="text" name="method" value="DELETE" class="noMostrar"><br><br>
+			Identificador <input type="text" name="usr"><br>
+			Unitat Organitzativa <input type="text" name="ou"><br>
 			<input type="submit" value="Envia" />
     	</form>
     	<a href="http://zend-ansasa.fjeclot.net/daw2_m08uf23_projecte_sanchez_andrea/menu.php">Menú usuari</a><br>
