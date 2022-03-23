@@ -44,5 +44,6 @@ if ($_GET['usr'] && $_GET['ou']){
 		<a href="http://zend-ansasa.fjeclot.net/daw2_m08uf23_projecte_sanchez_andrea/afegeix.php">Afegir usuari</a><br>
 		<a href="http://zend-ansasa.fjeclot.net/daw2_m08uf23_projecte_sanchez_andrea/elimina.php">Esborrar usuari</a><br>
 		<a href="http://zend-ansasa.fjeclot.net/daw2_m08uf23_projecte_sanchez_andrea/modificar.php">Modificar usuari</a>
+		<a href="http://zend-ansasa.fjeclot.net/daw2_m08uf23_projecte_sanchez_andrea/borrarwebdev.php">Borrar webdev</a>
 	</body>
 </html>

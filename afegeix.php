@@ -64,7 +64,7 @@ if($ldap->add($dn, $nova_entrada)){
 <html>
 <a href="http://zend-ansasa.fjeclot.net/daw2_m08uf23_projecte_sanchez_andrea/tancarSession.php">Tanca la sessio</a>
 <body>
-<h1>MODIFICA USUARI</h1>
+<h1>AFEGEIX USUARI</h1>
     	<form action="http://zend-ansasa.fjeclot.net/daw2_m08uf23_projecte_sanchez_andrea/afegeix.php" method="POST">
 			<input type="text" name="uid" placeholder="UID" required /><br>
             <input type="text" name="ou" placeholder="Unitat Organitzativa" required /><br>
